@@ -15,6 +15,7 @@ def call(String scmUrl, String branch, String credentialId) {
             stage('Build') {
                 steps {
                     echo "Building for branch: ${branch}"
+                    echo "this buiding from terra repo"
                 }
             }
             stage('Deploy') {
