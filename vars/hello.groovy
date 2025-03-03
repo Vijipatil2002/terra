@@ -2,6 +2,9 @@
 def call(String scmUrl, String branch, String credentialId) {
     pipeline {
         agent any
+        tools{
+            maven 'maven'
+        }
         stages {
             stage('Checkout') {
                 steps {
