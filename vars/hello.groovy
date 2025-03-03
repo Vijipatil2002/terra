@@ -12,10 +12,15 @@ def call(String scmUrl, String branch, String credentialId) {
                     }
                 }
             }
-            stage('Build') {
+             stage('Build'){
                 steps {
-                    echo "Building for branch: ${branch}"
-                    echo "this buiding from terra repo"
+                            bat 'mvn clean package'
+                    }
+                    post {
+                    success {
+                        echo 'Archiving the artifacts'
+                        archiveArtifacts artifacts: '**/target/*.war'
+                    }
                 }
             }
             stage('Deploy') {
