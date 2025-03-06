@@ -29,7 +29,7 @@ def call(String scmUrl, String branch, String credentialId) {
             stage('Deploy') {
                 steps {
                     echo "Deploying branch: ${branch}"
-                    deploy adapters: [tomcat9(credentialsId: 'c750fc63-ccd9-4a9a-9ecc-7896891b4123', path: '', url: 'http://localhost:8082/')], contextPath: null, war: '**/*.war'
+                    deploy adapters: [tomcat9(credentialsId: 'c750fc63-ccd9-4a9a-9ecc-7896891b4123', path: '', url: 'http://localhost:8082/')], contextPath: 'spare', war: '**/*.war'
                 }
             }
         }
