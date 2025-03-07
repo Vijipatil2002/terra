@@ -1,31 +1,19 @@
 def call(String scmUrl, String branch, String credentialId) {
-    pipeline {
+       pipeline {
         agent any
-        tools{
-            maven 'maven'
-        }
+    
         stages {
-            stage('Checkout') {
+            stage('Hello') {
                 steps {
-                    script {
-                        git branch: branch, 
-                            credentialsId: credentialId, 
-                            url: scmUrl
-                    }
+                    checkout scmGit(branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[credentialsId: 'My_id', url: 'https://github.com/Vijipatil2002/Hospital_frontend_project.git']])
                 }
             }
-             stage('Build'){
-                steps {
-                            bat 'mvn clean package'
-                    }
-                    post {
-                    success {
-                        echo 'Archiving the artifacts'
-                        archiveArtifacts artifacts: '**/target/*.war'
-                    }
-                }
+        }
+        post {
+            success {
+                build job: 'cd-job', wait: true
             }
-            
         }
     }
+
 }
