@@ -1,0 +1,12 @@
+
+pipeline {
+    agent any
+
+    stages {
+        stage('Hello') {
+            steps {
+                checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: 'My_id', url: 'https://github.com/Vijipatil2002/Hospital_frontend_project.git']])
+            }
+        }
+    }
+}
